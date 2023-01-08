@@ -43,7 +43,7 @@ public class CommonHP : MonoBehaviour
 
         DieCheck();
 
-        Debug.Log(this.name + HP.ToString());
+      //  Debug.Log(this.name + HP.ToString());
     }
 
     public void HurtAdjustSet(int Value)

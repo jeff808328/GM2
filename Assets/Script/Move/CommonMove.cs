@@ -79,6 +79,8 @@ public class CommonMove : MonoBehaviour
     private float BeforeDashSpeed;
     private float BeforeDahsMoveDirection;
     public float DashAdjust;
+
+    [HideInInspector] public bool Dashing;
     #endregion
 
     protected void SetData()
@@ -93,6 +95,7 @@ public class CommonMove : MonoBehaviour
         MaxJumpTimes = ChatacterData.AirJumpTimes;
 
         RollCD = ChatacterData.RollCD;
+        Dashing = false;
 
         OriginAddSpeedAdjust = AddSpeedAdjust;
         OriginMinusSpeedAdjust = MinusSpeedAdjust;
@@ -162,6 +165,7 @@ public class CommonMove : MonoBehaviour
     {
         Debug.Log("Dash");
 
+        Dashing = true;
         HorizonSpeedMax = 20;
 
         BeforeDashSpeed = HorizonSpeed;
@@ -176,6 +180,8 @@ public class CommonMove : MonoBehaviour
     }
     public void DashEnd()
     {
+        Dashing = false;
+
         if (LastMoveDirection == BeforeDahsMoveDirection)
             HorizonSpeed = BeforeDashSpeed;
 
@@ -191,7 +197,7 @@ public class CommonMove : MonoBehaviour
     }
     public void HorizonFlip()
     {
-        Debug.Log("flip");
+       // Debug.Log("flip");
 
         ScacleNow = this.gameObject.transform.lossyScale;
 

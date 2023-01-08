@@ -16,6 +16,7 @@ public class StateAttack : EnemyBaseState
         Debug.Log("attack by enemy");
 
         StateManager.StateSwitch(StateManager.StateFightIdle);// ¤Á´«ª¬ºA
+
     }
 
     public override void UpdateState(EnemyStateManager StateManager)

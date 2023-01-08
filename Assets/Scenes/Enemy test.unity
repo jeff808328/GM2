@@ -339,6 +339,7 @@ MonoBehaviour:
   ChatacterData: {fileID: 11400000, guid: 8ce237187275f8c4096810829bf0c1a3, type: 2}
   LastMoveDirection: 1
   DashAdjust: 1.8
+  Dashing: 0
 --- !u!114 &222635461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2258,6 +2259,7 @@ MonoBehaviour:
   ChatacterData: {fileID: 11400000, guid: 87305ac2d81815640bfeffdee079f100, type: 2}
   LastMoveDirection: 0
   DashAdjust: 0
+  Dashing: 0
 --- !u!114 &1586220592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2310,7 +2312,7 @@ MonoBehaviour:
   LastFlipTime: 0
   FlipCD: 0.4
   LastAttackTime: 0
-  AttackCD: 0.4
+  AttackCD: 1
   UsePatrol: 0
   Thron: {fileID: 6617061981476690949, guid: 43006c8805667bc4583a28c081ebb2b8, type: 3}
 --- !u!114 &1586220594
@@ -2888,6 +2890,7 @@ MonoBehaviour:
   ChatacterData: {fileID: 11400000, guid: 87305ac2d81815640bfeffdee079f100, type: 2}
   LastMoveDirection: 0
   DashAdjust: 0
+  Dashing: 0
 --- !u!114 &2030375094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3146,7 +3149,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.3344073, y: 1}
+    m_SensorSize: {x: 2.3292525, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

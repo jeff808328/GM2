@@ -44,8 +44,6 @@ public class EnemyStateManager : MonoBehaviour
     #endregion
 
     public GameObject Thron;
-
-
     public void ComponentSet()
     {
         EnemyBackGroundData = this.GetComponent<EnemyBackGroundData>();

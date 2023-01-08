@@ -13,6 +13,14 @@ public class LongHairDash : LongHairBaseState
 
     public override void UpdateState(LongHairStateManager StateManager)
     {
+        if(StateManager.EnemyBackGroundData.AttackAble)
+        {
+            StateManager.StateSwitch(StateManager.Attack);
+        }
 
+        if (!StateManager.EnemyMove.Dashing)
+        {
+            StateManager.StateSwitch(StateManager.Walk);
+        }
     }
 }

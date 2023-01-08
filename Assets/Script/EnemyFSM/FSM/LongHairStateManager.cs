@@ -41,10 +41,16 @@ public class LongHairStateManager : MonoBehaviour
     [HideInInspector] public float LastAttackTime;
     public float AttackCD; // 攻擊間隔 
 
-    [HideInInspector] public float LastStateSwitchTime;
-    public float StateTransDelay; // 進入下個狀態的延遲
+    public float StateTransDelay; // Idle進入下個狀態的延遲
 
-    [HideInInspector] public int SkillUsedTime;
+    [HideInInspector] public float LastThronAttackTime;
+    public float ThornAttackCD;
+    #endregion
+
+    #region Object
+
+    public GameObject Thron;
+
     #endregion
 
     private void Start()
@@ -65,14 +71,27 @@ public class LongHairStateManager : MonoBehaviour
     public void StateSwitch(LongHairBaseState NextState)
     {
         CurrentState = NextState;
-        NextState.EnterState(this);
+        
+        if(CurrentState != Idle)
+        {
+            EnterState();
+        }
+        else
+        {
+            Invoke("EnterState", StateTransDelay);
+        }
+    }
+
+    private void EnterState()
+    {
+        CurrentState.EnterState(this);
     }
 
     private void InitSetting()
     {
         LastFlipTime = Time.time;
         LastAttackTime = Time.time;
-        LastStateSwitchTime = Time.time;
+        LastThronAttackTime = Time.time;
     }
 
     private void ComponentSetting()

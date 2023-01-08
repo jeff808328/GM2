@@ -24,7 +24,7 @@ public class StateSingleThron : EnemyBaseState
         AttackDelay = StateManager.AttackCD;//掃描間隔設定
         LastScanTime = Time.time;
 
-        AdjustXray = 5;
+        AdjustXray = 5000;
 
         FirstScanDistance = StateManager.EnemyBackGroundData.DistanceXray;// 掃描第一次
     }
@@ -58,14 +58,20 @@ public class StateSingleThron : EnemyBaseState
         if (FirstScanDistance < SecondScanDistance)
         {
             AdjustXray *= Direction * -1;
+
+            Debug.Log("near");
         }
         else if (FirstScanDistance > SecondScanDistance)
         {
-            AdjustXray = Direction;
+            AdjustXray *= Direction;
+
+            Debug.Log("far");
         }
         else
         {
             AdjustXray = 0;
+
+            Debug.Log("stay");
         }
 
         if (PlayerPos != null)

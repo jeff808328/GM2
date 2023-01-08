@@ -12,7 +12,6 @@ public class CommonAnimator : MonoBehaviour
     private string JumpTriggerName = "VerticalSpeed";
     private string RunTriggerName = "HorizonSpeed";
 
-
     void Start()
     {
         Animator = this.GetComponent<Animator>();

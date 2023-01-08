@@ -7,8 +7,6 @@ public class LongHairIdle : LongHairBaseState
     public override void EnterState(LongHairStateManager StateManager)
     {
         Debug.Log("In Idle");
-
-        StateManager.LastStateSwitchTime = Time.time;
     }
 
     public override void UpdateState(LongHairStateManager StateManager)
@@ -17,10 +15,7 @@ public class LongHairIdle : LongHairBaseState
 
         AnyStateTrigger(StateManager);
 
-        if (Time.time > StateManager.LastStateSwitchTime + StateManager.StateTransDelay)
-        {
-            ActionSwitch(StateManager);
-        }
+        ActionSwitch(StateManager);
     }
 
     private void ActionSwitch(LongHairStateManager StateManager)
@@ -41,7 +36,11 @@ public class LongHairIdle : LongHairBaseState
                     }
                 case 2:
                     {
-                        StateManager.StateSwitch(StateManager.SingleThron);
+                        if (Time.time > StateManager.LastThronAttackTime + StateManager.ThornAttackCD)
+                        {
+                            StateManager.StateSwitch(StateManager.SingleThron);
+                        }
+
                         break;
                     }
             }
