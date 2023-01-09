@@ -13,8 +13,6 @@ public abstract class LongHairBaseState
 
     protected void FlipCheck(LongHairStateManager StateManager)
     {
-
-
         if (!StateManager.EnemyBackGroundData.FacePlayer && Time.time > StateManager.LastFlipTime + StateManager.FlipCD)
         {
             Debug.Log("filp");

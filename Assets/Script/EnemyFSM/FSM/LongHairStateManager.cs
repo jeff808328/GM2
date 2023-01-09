@@ -40,6 +40,8 @@ public class LongHairStateManager : AiBaseStateManager
 
         InitSetting();
 
+        LastThronAttackTime = Time.time;
+
         CurrentState = Idle;
         CurrentState.EnterState(this);
     }
