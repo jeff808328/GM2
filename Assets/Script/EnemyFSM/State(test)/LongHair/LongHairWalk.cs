@@ -18,5 +18,7 @@ public class LongHairWalk : LongHairBaseState
         AttackCheck(StateManager);
 
         StateManager.MoveDirection = StateManager.EnemyBackGroundData.PlayerDirection;
+
+        // 過一定時間後要回idle
     }
 }

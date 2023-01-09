@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LongHairStateManager : MonoBehaviour
+public class LongHairStateManager : AiBaseStateManager
 {
     #region State
 
@@ -21,30 +21,11 @@ public class LongHairStateManager : MonoBehaviour
 
     #endregion
 
-    #region Component
-
-    [HideInInspector] public EnemyBackGroundData EnemyBackGroundData;
-    [HideInInspector] public EnemyMove EnemyMove;
-    [HideInInspector] public GroundAndWallDetect GroundAndWallDetect;
-    [HideInInspector] public EnemyAttack EnemyAttack;
-    [HideInInspector] public CommonAnimator CommonAnimator;
-    [HideInInspector] public CommonHP CommonHP;
-
-    #endregion
-
     #region Value
-    public int MoveDirection; // 移動朝向
-
-    [HideInInspector] public float LastFlipTime;
-    public float FlipCD; // 翻轉間隔 
-
-    [HideInInspector] public float LastAttackTime;
-    public float AttackCD; // 攻擊間隔 
-
-    public float StateTransDelay; // Idle進入下個狀態的延遲
 
     [HideInInspector] public float LastThronAttackTime;
     public float ThornAttackCD;
+
     #endregion
 
     #region Object
@@ -87,20 +68,6 @@ public class LongHairStateManager : MonoBehaviour
         CurrentState.EnterState(this);
     }
 
-    private void InitSetting()
-    {
-        LastFlipTime = Time.time;
-        LastAttackTime = Time.time;
-        LastThronAttackTime = Time.time;
-    }
 
-    private void ComponentSetting()
-    {
-        EnemyBackGroundData = this.GetComponent<EnemyBackGroundData>();
-        EnemyMove = this.GetComponent<EnemyMove>();
-        GroundAndWallDetect = this.GetComponent<GroundAndWallDetect>();
-        EnemyAttack = this.GetComponent<EnemyAttack>();
-        CommonAnimator = this.GetComponent<CommonAnimator>();
-    }
 
 }

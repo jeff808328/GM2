@@ -49,7 +49,7 @@ public class PlayerMove : CommonMove
 
         if (Input.GetKey(KeyCode.R) && PlayerState.CancelAble)
         {
-            Debug.Log("ROLL");
+        //    Debug.Log("ROLL");
 
 
             CommonAnimator.RollTrigger();

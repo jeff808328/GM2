@@ -8,7 +8,7 @@ public class EnemyMove : CommonMove
 
     private EnemyMoveDetect EnemyMoveDetect;
 
-    private EnemyStateManager EnemyStateManager;
+    private AiBaseStateManager EnemyStateManager;
 
     private void Start()
     {
@@ -18,13 +18,15 @@ public class EnemyMove : CommonMove
 
         EnemyBackGroundData = this.GetComponent<EnemyBackGroundData>();
         EnemyMoveDetect = this.GetComponent<EnemyMoveDetect>();
-        EnemyStateManager = this.GetComponent<EnemyStateManager>(); 
+
+
+        EnemyStateManager = this.GetComponent<AiBaseStateManager>(); 
     }
 
     private void Update()
     {
         if (EnemyStateManager.MoveDirection != 0)
-            HorizonVelocity(EnemyStateManager.MoveDirection);
+            HorizonVelocity(EnemyStateManager.MoveDirection); 
         else
             MiunsSpeed();
 

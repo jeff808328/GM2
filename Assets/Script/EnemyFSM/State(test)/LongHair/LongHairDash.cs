@@ -9,6 +9,8 @@ public class LongHairDash : LongHairBaseState
         Debug.Log("In Dash");
 
         StateManager.CommonAnimator.RollTrigger();
+
+        StateManager.EnemyMove.CallDash(StateManager.MoveDirection, 0.5f);
     }
 
     public override void UpdateState(LongHairStateManager StateManager)

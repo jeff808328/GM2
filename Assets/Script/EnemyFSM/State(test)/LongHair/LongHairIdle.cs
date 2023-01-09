@@ -7,6 +7,8 @@ public class LongHairIdle : LongHairBaseState
     public override void EnterState(LongHairStateManager StateManager)
     {
         Debug.Log("In Idle");
+
+        // 讓ebd重新ramdon新的Mid
     }
 
     public override void UpdateState(LongHairStateManager StateManager)
@@ -24,7 +26,7 @@ public class LongHairIdle : LongHairBaseState
         {
             switch (StateManager.EnemyBackGroundData.ActionIndex)
             {
-                case 0:
+                case 2:
                     {
                         StateManager.StateSwitch(StateManager.Walk);
                         break;
@@ -34,7 +36,7 @@ public class LongHairIdle : LongHairBaseState
                         StateManager.StateSwitch(StateManager.Dash);
                         break;
                     }
-                case 2:
+                case 0:
                     {
                         if (Time.time > StateManager.LastThronAttackTime + StateManager.ThornAttackCD)
                         {

@@ -2096,10 +2096,10 @@ GameObject:
   - component: {fileID: 1586220596}
   - component: {fileID: 1586220595}
   - component: {fileID: 1586220594}
-  - component: {fileID: 1586220593}
   - component: {fileID: 1586220592}
   - component: {fileID: 1586220591}
   - component: {fileID: 1586220590}
+  - component: {fileID: 1586220598}
   m_Layer: 7
   m_Name: LongHair
   m_TagString: Untagged
@@ -2283,7 +2283,7 @@ MonoBehaviour:
   BotBoxHeight: 0.4
   BotWideAdjust: 0
   BotHeightAdjust: -0.8
-  UseLeft: 1
+  UseLeft: 0
   UseRight: 0
   Ground:
     serializedVersion: 2
@@ -2291,30 +2291,6 @@ MonoBehaviour:
   Wall:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &1586220593
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1586220585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84b3b48e7fec55749a68d3a4d6cf3e94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyBackGroundData: {fileID: 0}
-  EnemyMove: {fileID: 0}
-  GroundAndWallDetect: {fileID: 0}
-  EnemyAttack: {fileID: 0}
-  CommonAnimator: {fileID: 0}
-  MoveDirection: 0
-  LastFlipTime: 0
-  FlipCD: 0.4
-  LastAttackTime: 0
-  AttackCD: 1
-  UsePatrol: 0
-  Thron: {fileID: 6617061981476690949, guid: 43006c8805667bc4583a28c081ebb2b8, type: 3}
 --- !u!114 &1586220594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2340,9 +2316,9 @@ MonoBehaviour:
   PlayerPos: {fileID: 0}
   DistanceXray: 0
   PlayerDirection: 0
-  MidMini: 3
-  MidMax: 6
-  RamdonValue: 0.5
+  MidMini: 10
+  MidMax: 20
+  RamdonValue: 5
   Buffer: 3
   ActionIndex: 0
   Nearing: 0
@@ -2351,10 +2327,10 @@ MonoBehaviour:
   BoxWide: 1
   BoxHeight: 2.5
   AttackAble: 0
-  AirBoxWideAdjust: 0
-  AirBoxHighAdjust: 0
-  AirBoxWide: 0
-  AirBoxHeight: 0
+  AirBoxWideAdjust: 0.5
+  AirBoxHighAdjust: 2
+  AirBoxWide: 2
+  AirBoxHeight: 1
   AirAttackAble: 0
   FlipRayDirection: 1
 --- !u!114 &1586220595
@@ -2436,6 +2412,33 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1586220598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586220585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ea9a88e39c159047bdc6aed4b7f239d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyBackGroundData: {fileID: 0}
+  EnemyMove: {fileID: 0}
+  GroundAndWallDetect: {fileID: 0}
+  EnemyAttack: {fileID: 0}
+  CommonAnimator: {fileID: 0}
+  CommonHP: {fileID: 0}
+  MoveDirection: 0
+  LastFlipTime: 0
+  FlipCD: 0.1
+  LastAttackTime: 0
+  AttackCD: 0.3
+  StateTransDelay: 0.3
+  LastThronAttackTime: 0
+  ThornAttackCD: 30
+  Thron: {fileID: 6617061981476690949, guid: 43006c8805667bc4583a28c081ebb2b8, type: 3}
 --- !u!1 &1758129873
 GameObject:
   m_ObjectHideFlags: 0

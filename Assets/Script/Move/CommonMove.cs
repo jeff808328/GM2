@@ -208,7 +208,12 @@ public class CommonMove : MonoBehaviour
 
     // ¯S®í°Ê§@
 
-    public IEnumerator Dash(int Direction,float DashTime)
+    public void CallDash(int Direction, float DashTime)
+    {
+        StartCoroutine(Dash(Direction, DashTime));
+    }
+
+    private IEnumerator Dash(int Direction,float DashTime)
     {
 
         HorizonSpeedMax = ChatacterData.MaxMoveSpeed * 2; ;

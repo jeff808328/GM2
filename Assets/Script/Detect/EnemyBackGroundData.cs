@@ -55,12 +55,13 @@ public class EnemyBackGroundData : MonoBehaviour
     [Header("DistanceCal")]
 
     [HideInInspector] public Transform PlayerPos;
-    public float DistanceXray;
+    [HideInInspector] public float DistanceXray;
     private float DistanceXrayLast;
-    public int PlayerDirection;
+    [HideInInspector] public int PlayerDirection;
 
     // 距離值
 
+    [Header("ActionIndex Range")]
     // far，mid，near，ramdon
 
     public float MidMini;
@@ -72,15 +73,17 @@ public class EnemyBackGroundData : MonoBehaviour
     public float RamdonValue;
     public float Buffer;
 
-    public int ActionIndex; //0,dash 1,jump 2,walk
+    private Vector3 SelfPos;
+    private Vector3 MidMiniPos;
+    private Vector3 MidMaxPos;
+
+    [HideInInspector] public int ActionIndex; //0,dash 1,jump 2,walk
 
     [HideInInspector] public bool Nearing;
 
     #endregion
 
     #region CheckAttack
-
-    [Header("AttackBox")]
 
     protected Vector2 AttackBoxCenter;
 
@@ -99,10 +102,6 @@ public class EnemyBackGroundData : MonoBehaviour
     private float BoxHeight;
 
     public bool AttackAble;
-
-
-
-    [Header("AirAttackBox")]
 
     protected Vector2 AirBoxCenter;
 
@@ -143,7 +142,7 @@ public class EnemyBackGroundData : MonoBehaviour
 
         CalDistance();
 
-        Debug.DrawRay(RayCastSourcePos, RayCastDirection, Color.yellow, 1000f);
+        DrawRays();
     }
 
     private void InitSet()
@@ -157,12 +156,26 @@ public class EnemyBackGroundData : MonoBehaviour
         RandonDistance();
     }
 
+    private void DrawRays()
+    {
+        Debug.DrawRay(RayCastSourcePos, RayCastDirection, Color.yellow, 1000f);
+
+        SelfPos = this.transform.position;
+
+        MidMiniPos = new Vector3(SelfPos.x + MidMini * PlayerDirection, 0, 0); // 加上移動方向參數
+
+        MidMaxPos = new Vector3(SelfPos.x + MidMax * PlayerDirection, 0, 0);
+
+        Debug.DrawRay(MidMiniPos, new Vector3(0, 1, 0), Color.red, 1000f);
+        Debug.DrawRay(MidMaxPos, new Vector3(0, 1, 0), Color.blue, 1000f);
+    }
+
     private void SearchPlayer()
     {
 
         var PO = Physics2D.OverlapBox(ViewBoxCenter, ViewBoxSize, 0, Player);
 
-        //  Debug.Log(PO.gameObject.name);
+        Debug.Log(PO.gameObject.name);
 
         if (PO == null)
         {
@@ -208,11 +221,11 @@ public class EnemyBackGroundData : MonoBehaviour
             Nearing = (DistanceXray >= DistanceXrayLast) ? false : true;
 
             if (DistanceXray > MidMax)
-                ActionIndex = 0;
+                ActionIndex = 0; // far = 0
             else if (DistanceXray < MidMini)
-                ActionIndex = 2;
+                ActionIndex = 2; // near = 2
             else
-                ActionIndex = 1;
+                ActionIndex = 1; // mid = 1
 
             PlayerDirection = ((PlayerPos.transform.position.x - this.transform.position.x) < 0) ? -1 : 1;
 
@@ -225,13 +238,19 @@ public class EnemyBackGroundData : MonoBehaviour
         AttackBoxCenter = new Vector2(transform.position.x + BoxWideAdjust * PlayerDirection,
                            transform.position.y + BoxHighAdjust * transform.localScale.y);
 
-        AttackBoxSize = new Vector2(transform.lossyScale.x * BoxWide, transform.lossyScale.y * BoxHeight);
+        AttackBoxSize = new Vector2(transform.lossyScale.x * BoxWide, transform.lossyScale.y * BoxHeight); // attackable
 
 
         ViewBoxCenter = new Vector2(transform.position.x + ViewBoxWideAdjust * PlayerDirection,
                            transform.position.y + ViewBoxHighAdjust);
 
-        ViewBoxSize = new Vector2(ViewBoxWide, ViewBoxHeight);
+        ViewBoxSize = new Vector2(ViewBoxWide, ViewBoxHeight); // faceplayer
+
+
+        AirBoxCenter = new Vector2(transform.position.x + AirBoxWideAdjust * PlayerDirection,
+                         transform.position.y + AirBoxHighAdjust * transform.localScale.y);
+
+        AirBoxSize = new Vector2(transform.lossyScale.x * AirBoxWide, transform.lossyScale.y * AirBoxHeight); // airattackable
 
 
         AttackAble = Physics2D.OverlapBox(AttackBoxCenter, AttackBoxSize, 0, Player);
@@ -268,6 +287,9 @@ public class EnemyBackGroundData : MonoBehaviour
 
         Gizmos.color = Color.gray;
         Gizmos.DrawWireCube(ViewBoxCenter, ViewBoxSize);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(AirBoxCenter, AirBoxSize);
     }
 
     // 記得補上牆壁偵測
