@@ -55,17 +55,7 @@ public class CommonMove : MonoBehaviour
 
     protected Rigidbody2D Rd;
 
-    // Common
-
-    //protected EnemyBackGroundData EnemyBackGroundData;
-
-    //protected EnemyMoveDetect EnemyMoveDetect;
-
-    // Ai
-
-    //protected PlayerState PlayerState;
-
-    // Player
+    protected CommonHP CommonHP;
 
 
     #endregion
@@ -107,7 +97,9 @@ public class CommonMove : MonoBehaviour
 
         CommonAnimator = this.GetComponent<CommonAnimator>();
 
-        GroundAndWallDetect = this.GetComponent<GroundAndWallDetect>();   
+        GroundAndWallDetect = this.GetComponent<GroundAndWallDetect>();
+
+        CommonHP = this.GetComponent<CommonHP>();
     }
 
     // start設定
@@ -128,6 +120,7 @@ public class CommonMove : MonoBehaviour
 
         VerticalSpeed = VerticalSpeedMax;
     }
+
     protected void MiunsSpeed()
     {
         //  Debug.Log("minus speed is working");
@@ -155,15 +148,26 @@ public class CommonMove : MonoBehaviour
 
     // 物理基本
 
-    public void Brake() // 急煞 將速度與加速度歸0
+    public void CallBrake(float BrakeLength)
     {
-      //  Debug.Log("brake");
+        StartCoroutine(Brake(BrakeLength));
+    }
+
+    IEnumerator Brake(float BrakeLength) // 急煞 將速度與加速度歸0
+    {
         HorizonSpeed = 0;
         AddSpeedAdjust = 0;
+
+        yield return new WaitForSeconds(BrakeLength);
+
+        AddSpeedAdjust = ChatacterData.AddSpeed;
     }
+
     public void DashStart(int Direction)
     {
         Debug.Log("Dash");
+
+        StartCoroutine(CommonHP.HurtAdjustSet(0));
 
         Dashing = true;
         HorizonSpeedMax = 20;
@@ -215,11 +219,12 @@ public class CommonMove : MonoBehaviour
 
     private IEnumerator Dash(int Direction,float DashTime)
     {
+        StartCoroutine(CommonHP.HurtAdjustSet(0));
 
-        HorizonSpeedMax = ChatacterData.MaxMoveSpeed * 2; ;
+        HorizonSpeedMax = ChatacterData.MaxMoveSpeed * DashAdjust * 2; 
 
         BeforeDashSpeed = HorizonSpeed;
-        HorizonSpeed = HorizonSpeedMax * 0.5f * DashAdjust * LastMoveDirection * Direction;
+        HorizonSpeed = HorizonSpeedMax * DashAdjust * Direction;
 
         yield return new WaitForSecondsRealtime(DashTime);
 

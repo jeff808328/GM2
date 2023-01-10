@@ -6,8 +6,10 @@ using UnityEngine.UI;
 public class CommonHP : MonoBehaviour
 {
     public ChatacterData ChatacterData;
+    private CommonMove CommonMove;
 
     [HideInInspector] public float HP;
+    private float Damage;
     private float Def;
     [SerializeField] private float HurtAdjust;
 
@@ -29,26 +31,42 @@ public class CommonHP : MonoBehaviour
         Fill.color = Gradient.Evaluate(1f);
 
         Animator = this.GetComponent<Animator>();
+        CommonMove = this.GetComponent <CommonMove>();
     }
 
-    public void Hurt(float AttackerAtk)
+    public void Hurt(float AttackerAtk, Vector2 AttackerPos)
     {
-        HP -= (AttackerAtk - Def) * HurtAdjust;
+        Damage = (AttackerAtk - Def) * HurtAdjust;
+
+        HP -= Damage;
 
         Slider.value = HP;
         Fill.color = Gradient.Evaluate(Slider.normalizedValue);
 
-        if (HurtAdjust > 0)
+        if (Damage > 0)
+        {
             Animator.SetTrigger("Hurt");
+
+            if (AttackerPos.x > transform.position.x)
+                CommonMove.CallDash(-1, Damage * 1f);
+            else if (AttackerPos.x < transform.position.x)
+                CommonMove.CallDash(1, Damage * 1f);
+
+        }
+
 
         DieCheck();
 
-      //  Debug.Log(this.name + HP.ToString());
+        Debug.Log(this.name + HP.ToString());
     }
 
-    public void HurtAdjustSet(int Value)
+    public IEnumerator HurtAdjustSet(int Value)
     {
         HurtAdjust = Value;
+
+        yield return new WaitForSeconds(ChatacterData.InvincibleLength);
+
+        HurtAdjust = 1;
     }
 
     public void DieCheck()

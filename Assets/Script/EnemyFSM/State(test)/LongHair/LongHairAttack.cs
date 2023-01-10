@@ -10,6 +10,12 @@ public class LongHairAttack : LongHairBaseState
 
         StateManager.CommonAnimator.AttackTrigger();
 
+        StateManager.EnemyAttack.Attack();
+
+        StateManager.EnemyMove.CallBrake(0.5f);
+
+        StateManager.LastAttackTime = Time.time;
+
         StateManager.StateSwitch(StateManager.Idle);
     }
 

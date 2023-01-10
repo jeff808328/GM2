@@ -46,6 +46,8 @@ public class LongHairIdle : LongHairBaseState
                         break;
                     }
             }
+
+            // StateManager.StateSwitch(StateManager.Dash);
         }
     }
 

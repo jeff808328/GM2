@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class EnemyBackGroundData : MonoBehaviour
 {
@@ -125,6 +127,8 @@ public class EnemyBackGroundData : MonoBehaviour
 
     public bool FlipRayDirection;
 
+    public TMP_Text text;
+
     void Start()
     {
         InitSet();
@@ -143,6 +147,9 @@ public class EnemyBackGroundData : MonoBehaviour
         CalDistance();
 
         DrawRays();
+
+        if (text != null)
+            text.text = ActionIndex.ToString();
     }
 
     private void InitSet()
@@ -175,7 +182,7 @@ public class EnemyBackGroundData : MonoBehaviour
 
         var PO = Physics2D.OverlapBox(ViewBoxCenter, ViewBoxSize, 0, Player);
 
-        Debug.Log(PO.gameObject.name);
+        //Debug.Log(PO.gameObject.name);
 
         if (PO == null)
         {
@@ -200,7 +207,7 @@ public class EnemyBackGroundData : MonoBehaviour
     {
         RaycastHit2D RH = Physics2D.Raycast(RayCastSourcePos, RayCastDirection, Mathf.Infinity);
 
-        Debug.Log(RH.collider.name);
+      //  Debug.Log(RH.collider.name);
 
         if (RH.collider.tag != "Player")
         {

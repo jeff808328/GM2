@@ -22,6 +22,7 @@ public class PlayerAttack : CommonAttack
     void Update()
     {
         UpdataCollision();
+        UpdatePos();
 
         if (Input.GetMouseButtonDown(0))
         {

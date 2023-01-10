@@ -40,6 +40,8 @@ public class CommonAttack : MonoBehaviour
     protected CommonMove CommonMove;
     public ChatacterData ChatacterData;
 
+    protected Vector2 NowPos;
+
     protected void SetComponent()
     {
         Animator = this.GetComponent<CommonAnimator>();
@@ -76,7 +78,7 @@ public class CommonAttack : MonoBehaviour
         // ³y¦¨¶Ë®`
         foreach (var Attacked in AttackDectect)
         {
-            Attacked.GetComponent<CommonHP>().Hurt(ChatacterData.Atk);
+            Attacked.GetComponent<CommonHP>().Hurt(ChatacterData.Atk,NowPos);
        //     Debug.Log(Attacked.gameObject.name);
         }
 
@@ -94,4 +96,9 @@ public class CommonAttack : MonoBehaviour
         BoxSize = new Vector2(transform.lossyScale.x * BoxWide, transform.lossyScale.y * BoxHeight);
     }
 
+    protected void UpdatePos()
+    {
+        NowPos.x = transform.position.x;
+        NowPos.y = transform.position.y;
+    }
 }

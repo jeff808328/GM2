@@ -10,7 +10,7 @@ public class LongHairDash : LongHairBaseState
 
         StateManager.CommonAnimator.RollTrigger();
 
-        StateManager.EnemyMove.CallDash(StateManager.MoveDirection, 0.5f);
+        StateManager.EnemyMove.CallDash(StateManager.MoveDirection, 1f);
     }
 
     public override void UpdateState(LongHairStateManager StateManager)

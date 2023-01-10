@@ -11,7 +11,8 @@ public class EnemyAttack : CommonAttack
 
     void Update()
     {
-        UpdataCollision();        
+        UpdataCollision();
+        UpdatePos();
     }
 
     private void OnDrawGizmos()
