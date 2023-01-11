@@ -16,7 +16,7 @@ public class AiBaseStateManager : MonoBehaviour
     #endregion
 
     #region Value
-    [HideInInspector] public int MoveDirection; // 移動朝向
+    public int MoveDirection; // 移動朝向
 
     [HideInInspector] public float LastFlipTime;
     public float FlipCD; // 翻轉間隔 
